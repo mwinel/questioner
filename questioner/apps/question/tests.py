@@ -1,4 +1,7 @@
 from django.test import TestCase
+from django.urls import reverse
+from rest_framework.test import APIClient
+from rest_framework import status
 from .models import Question
 
 
@@ -20,3 +23,24 @@ class QuestionModelTestCase(TestCase):
     def test_model_returns_a_representation(self):
         """Test api returns a readble instance of the question model."""
         self.assertEqual(str(self.question), self.question_title)
+
+
+class QuestionViewTestCase(TestCase):
+    """Test suite for the question API views."""
+
+    def setUp(self):
+        """Define the test client and other test variables."""
+        self.client = APIClient()
+        self.question_data = {
+                'title': 'who did go to ibiza?', 
+                'body': 'In the summer...'
+            }
+        self.response = self.client.post(
+            reverse('create'),
+            self.question_data,
+            format="json"
+        )
+
+    def test_api_can_create_a_question(self):
+        """Test api can create a question."""
+        self.assertEqual(self.response.status_code, status.HTTP_201_CREATED)
