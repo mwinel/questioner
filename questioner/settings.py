@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'meetup.apps.MeetupConfig',
+    'questioner.apps.question',
 
     'rest_framework',
     'rest_framework.authtoken',
