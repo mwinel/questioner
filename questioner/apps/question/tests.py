@@ -14,5 +14,9 @@ class QuestionModelTestCase(TestCase):
         """Test the question model can create a question."""
         old_count = Question.objects.count()
         self.question.save()
-        new_count =Bucketlist.objects.count()
+        new_count = Question.objects.count()
         self.assertNotEqual(old_count, new_count)
+
+    def test_model_returns_a_representation(self):
+        """Test api returns a readble instance of the question model."""
+        self.assertEqual(str(self.question), self.question_title)
